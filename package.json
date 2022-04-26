@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@github/clipboard-copy-element": "^1.1.2",
     "@mapbox/mapbox-sdk": "^0.13.3",
     "cloudinary": "^1.29.0",
     "connect-flash": "^0.1.1",
