@@ -1,5 +1,8 @@
 # About YelpCamp
-YelpCamp is a Web App developed alongside the <a href="https://www.udemy.com/course/the-web-developer-bootcamp/">Web Developer Bootcamp 2022</a> Course by <a href="https://www.udemy.com/user/coltsteele/">Colt Steele</a> for learning purposes. 
+YelpCamp is a responsive Web App developed alongside the <a href="https://www.udemy.com/course/the-web-developer-bootcamp/">Web Developer Bootcamp 2022</a> Course by <a href="https://www.udemy.com/user/coltsteele/">Colt Steele</a> for learning purposes. 
+
+The application has authentication, performs simple CRUD operation and has maps integrated thanks to <a href="https://www.mapbox.com/">Mapbox</a>.
+
 # Stack used
 * HTML
 * CSS
