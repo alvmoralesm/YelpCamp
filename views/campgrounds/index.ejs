@@ -1,4 +1,8 @@
-<% layout('layouts/boilerplate') %>
+<% layout('layouts/boilerplate') %> 
+<% if(signedInUser) {%>
+<h1>Hello <%= signedInUser.username %></h1>
+<% } %>
+
 <div id="cluster-map"></div>
 <h1>All Campgrounds</h1>
 <div>

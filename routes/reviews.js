@@ -1,9 +1,14 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
 const reviews = require("../controllers/reviews");
-const { validateReview, isLoggedIn, isReviewAuthor } = require("../middleware");
+const {
+  validateReview,
+  isLoggedIn,
+  isReviewAuthor,
+  canReview,
+} = require("../middleware");
 
-router.post("/", isLoggedIn, validateReview, reviews.createReview);
+router.post("/", isLoggedIn, canReview, validateReview, reviews.createReview);
 
 router.delete("/:reviewId", isLoggedIn, isReviewAuthor, reviews.deleteReview);
 

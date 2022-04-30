@@ -51,7 +51,7 @@
           <li class="list-group-item">$<%= campground.price %>/night</li>
         </ul>
 
-        <% if(signedInUser && campground.author.equals(signedInUser.id)){ %>
+        <% if(signedInUser && campground.author.equals(signedInUser.id) || signedInUser && signedInUser.isAdmin ){ %>
         <div class="card-body">
           <a
             href="/campgrounds/<%= campground.id %>/edit"
@@ -76,7 +76,7 @@
 
     <div class="col-6">
       <div id='map'></div>
-      <% if(signedInUser){%>
+      <% if(signedInUser ){%>
       <h2 class="mb-3">Leave a Review</h2>
       <form
         action="/campgrounds/<%= campground.id %>/reviews"
@@ -147,8 +147,9 @@
         </div>
         <button class="btn btn-success">Submit</button>
       </form>
-      <% } %> <% for (let review of campground.reviews) { %>
-      <div class="card mb-3">
+      <% } %> 
+      <% for (let review of campground.reviews) { %>
+      <div class="card mb-3 mt-3">
         <div class="card-body">
           <h5
             class="card-title starability-result"

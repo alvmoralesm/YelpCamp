@@ -24,7 +24,7 @@ const userRoutes = require("./routes/users");
 
 const MongoStore = require("connect-mongo");
 
-const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/yelp-camp";
+const dbUrl = "mongodb://localhost:27017/yelp-camp"; //process.env.DB_URL ||
 
 main().catch((err) => console.log(err, "ERROR"));
 
@@ -156,9 +156,9 @@ app.all("*", (req, res, next) => {
 app.use((err, req, res, next) => {
   const { status = 500 } = err;
   if (!err.message) err.message = "Oh No. Something Went Wrong!";
-  console.dir(err.message);
-  console.log("------------------------------------------");
-  console.dir(err);
+  // console.dir(err.message);
+  // console.log("------------------------------------------");
+  // console.dir(err);
   res.status(status).render("error", { err });
 });
 
