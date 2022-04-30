@@ -6,6 +6,8 @@ The application has authentication and authorization, user roles, performs simpl
 # Stack used
 * HTML
 * CSS
+* Javascript
+* EJS
 * Bootstrap 5.1.3
 * Node.js 16.14.2
 * MongoDB
