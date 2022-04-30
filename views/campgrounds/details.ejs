@@ -76,7 +76,7 @@
 
     <div class="col-6">
       <div id='map'></div>
-      <% if(signedInUser ){%>
+      <% if(signedInUser && !campground.author.equals(signedInUser.id) || signedInUser.isAdmin){%>
       <h2 class="mb-3">Leave a Review</h2>
       <form
         action="/campgrounds/<%= campground.id %>/reviews"
@@ -161,7 +161,7 @@
             Reviewed by <%= review.author.username %>
           </h6>
           <p class="card-text">Review: <%= review.body %></p>
-          <% if(signedInUser && review.author.equals(signedInUser.id)){ %>
+          <% if(signedInUser && review.author.equals(signedInUser.id) || signedInUser.isAdmin){ %>
           <form
             action="/campgrounds/<%= campground.id %>/reviews/<%= review.id %>?_method=DELETE"
             method="POST"
