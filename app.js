@@ -24,7 +24,7 @@ const userRoutes = require("./routes/users");
 
 const MongoStore = require("connect-mongo");
 
-const dbUrl = "mongodb://localhost:27017/yelp-camp"; //process.env.DB_URL ||
+const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/yelp-camp"; //process.env.DB_URL ||
 
 main().catch((err) => console.log(err, "ERROR"));
 
