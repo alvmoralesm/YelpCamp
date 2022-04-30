@@ -76,7 +76,7 @@
 
     <div class="col-6">
       <div id='map'></div>
-      <% if(signedInUser && !campground.author.equals(signedInUser.id) || signedInUser.isAdmin){%>
+      <% if(signedInUser && !campground.author.equals(signedInUser.id)){%>
       <h2 class="mb-3">Leave a Review</h2>
       <form
         action="/campgrounds/<%= campground.id %>/reviews"
@@ -147,7 +147,7 @@
         </div>
         <button class="btn btn-success">Submit</button>
       </form>
-      <% } %> 
+      <% }  %> 
       <% for (let review of campground.reviews) { %>
       <div class="card mb-3 mt-3">
         <div class="card-body">
