@@ -2,6 +2,7 @@ const User = require("../models/user");
 const catchAsync = require("../utils/catchAsync");
 
 const admCode = process.env.ADMCODE;
+const mgrCode = process.env.MGRCODE;
 
 module.exports.renderRegister = (req, res) => {
   res.render("auth/register");
@@ -11,8 +12,10 @@ module.exports.register = catchAsync(async (req, res) => {
   try {
     const { email, username, password } = req.body;
     const user = new User({ email, username });
-    if (req.body.adminCode === admCode) {
+    if (req.body.roleCode === admCode) {
       user.isAdmin = true;
+    } else if (req.body.roleCode === mgrCode) {
+      user.isMgr = true;
     }
     const registeredUser = await User.register(user, password);
     req.login(registeredUser, (err) => {

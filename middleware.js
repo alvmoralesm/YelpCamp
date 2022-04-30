@@ -53,6 +53,17 @@ module.exports.isAuthor = async (req, res, next) => {
   }
 };
 
+module.exports.isReviewAuthor = async (req, res, next) => {
+  const { id, reviewId } = req.params;
+  const review = await Review.findById(reviewId);
+  if (review.author.equals(req.user.id) || req.user.isAdmin) {
+    next();
+  } else if (!review.author.equals(req.user.id)) {
+    req.flash("error", "You do not have permission to do that!");
+    return res.redirect(`/campgrounds/${id}`);
+  }
+};
+
 module.exports.canReview = async (req, res, next) => {
   const { id } = req.params;
   const campground = await Campground.findById(id);
@@ -61,17 +72,6 @@ module.exports.canReview = async (req, res, next) => {
   } else if (campground.author.equals(req.user.id)) {
     console.log(campground.author.equals(req.user.id));
     req.flash("error", "You cannot review your own campground!");
-    return res.redirect(`/campgrounds/${id}`);
-  }
-};
-
-module.exports.isReviewAuthor = async (req, res, next) => {
-  const { id, reviewId } = req.params;
-  const review = await Review.findById(reviewId);
-  if (review.author.equals(req.user.id) || req.user.isAdmin) {
-    next();
-  } else if (!review.author.equals(req.user.id)) {
-    req.flash("error", "You do not have permission to do that!");
     return res.redirect(`/campgrounds/${id}`);
   }
 };

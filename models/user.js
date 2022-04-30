@@ -12,6 +12,10 @@ const UserSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  isMgr: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 UserSchema.plugin(passportLocalMongoose);
