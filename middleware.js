@@ -45,7 +45,7 @@ module.exports.userInLogout = (req, res, next) => {
 module.exports.isAuthor = async (req, res, next) => {
   const { id } = req.params;
   const campground = await Campground.findById(id);
-  if (campground.author.equals(req.user.id) || req.user.isAdmin === true) {
+  if (campground.author.equals(req.user.id) || req.user.isAdmin) {
     next();
   } else {
     req.flash("error", "You do not have permission to do that!");
@@ -67,11 +67,31 @@ module.exports.isReviewAuthor = async (req, res, next) => {
 module.exports.canReview = async (req, res, next) => {
   const { id } = req.params;
   const campground = await Campground.findById(id);
-  if (!campground.author.equals(req.user.id) || req.user.isAdmin) {
+  if (
+    !campground.author.equals(req.user.id) ||
+    req.user.isAdmin ||
+    (req.user.isAdmin === false && req.user.isMgr === false)
+  ) {
     next();
   } else if (campground.author.equals(req.user.id)) {
     console.log(campground.author.equals(req.user.id));
     req.flash("error", "You cannot review your own campground!");
     return res.redirect(`/campgrounds/${id}`);
   }
+};
+
+module.exports.canManageCampgrounds = async (req, res, next) => {
+  if (req.user.isMgr === true || req.user.isAdmin === true) {
+    next();
+  } else {
+    req.flash("error", "You do not have permission to create campgrounds!");
+    console.log(req.user.isMgr === false);
+    return res.redirect(`/campgrounds/`);
+  }
+  // if (!campground.author.equals(req.user.id) || req.user.isAdmin) {
+  //   next();
+  // } else if (campground.author.equals(req.user.id)) {
+  //   req.flash("error", "Error!");
+  //   return res.redirect(`/campgrounds/`);
+  // }
 };
