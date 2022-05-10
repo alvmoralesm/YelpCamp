@@ -8,6 +8,8 @@ const UserSchema = new Schema({
     required: true,
     unique: true,
   },
+  resetPasswordToken: String,
+  resetPasswordExpires: Date,
   isAdmin: {
     type: Boolean,
     default: false,

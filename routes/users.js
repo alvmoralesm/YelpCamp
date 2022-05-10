@@ -4,9 +4,7 @@ const passport = require("passport");
 const { userInLogout } = require("../middleware");
 const users = require("../controllers/users");
 
-router.route("/register")
-  .get(users.renderRegister)
-  .post(users.register);
+router.route("/register").get(users.renderRegister).post(users.register);
 
 router
   .route("/login")
@@ -20,5 +18,9 @@ router
   );
 
 router.get("/logout", userInLogout, users.logout);
+
+router.route("/forgot").get(users.renderForgot).post(users.sendEmail);
+
+router.route("/reset/:token").get(users.renderReset).post(users.changePassword);
 
 module.exports = router;
